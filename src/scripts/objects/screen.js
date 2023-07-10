@@ -14,27 +14,31 @@ const screen = {
 
         let eventsItems = "";
         user.events.forEach((event) => {
-            eventsItems += `<li><a href="${event.repo.url}" target="_blank">${event.repo.name
-                }</a> - ${event.payload.commits ? event.payload.commits[0].message : ""
-                }</li>`;
+            eventsItems += `<li>
+                                <a href="${event.repo.url}" target="_blank">${event.repo.name}</a> - ${event.payload.commits ? event.payload.commits[0].message : ""}
+                            </li>`;
         });
+        
         if (user.events.length > 0) {
             this.userProfile.innerHTML +=  `<div class="events-field">
                                                 <h2>Eventos</h2>
                                                 <ul>${eventsItems}</ul>
                                             </div>`;
-        }
+        };
 
         let repositoriesItens = ''
-        user.repositories.forEach(repo => repositoriesItens += `<li><a href="${repo.html_url}" target="_blank">
-                                                                    <div class="repository-name">${repo.name}</div>
-                                                                    <div class="repository-info">
-                                                                        <span class="item-info">🍴 ${repo.forks_count}</span>  
-                                                                        <span class="item-info">⭐️ ${repo.stargazers_count}</span>  
-                                                                        <span class="item-info"> 👀 ${repo.watchers_count}</span> 
-                                                                        <span class="item-info"> 👨‍💻 ${repo.language}</span>
-                                                                    </div>
-                                                                </a></li>`)
+        user.repositories.forEach(repo => repositoriesItens += `<li>
+                                                                    <a href="${repo.html_url}" target="_blank">
+                                                                        <div class="repository-name">${repo.name}</div>
+                                                                        <div class="repository-info">
+                                                                            <span class="item-info">🍴 ${repo.forks_count}</span>  
+                                                                            <span class="item-info">⭐️ ${repo.stargazers_count}</span>  
+                                                                            <span class="item-info"> 👀 ${repo.watchers_count}</span> 
+                                                                            <span class="item-info"> 👨‍💻 ${repo.language ?? 'linguagem indefinida'}</span>
+                                                                        </div>
+                                                                    </a>
+                                                                </li>`
+        );
 
         if (user.repositories.length > 0) {
             this.userProfile.innerHTML += `<section class="repositories">
